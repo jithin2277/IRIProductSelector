@@ -25,7 +25,7 @@ namespace IRIProductSelector.Data
 
         public IList<RetailerProduct> GetDistinctRetailerProducts()
         {
-            var retailerProducts = _retailerProductRepository.GetAll().GroupBy(g => g.ProductId).Select(s => s.FirstOrDefault()).ToList();
+            var retailerProducts = _retailerProductRepository.GetAll().ToList();
             return retailerProducts;
         }
     }
