@@ -15,12 +15,10 @@ namespace IRIProductSelector.App
     {
         public override void Load()
         {
-            Bind<ICsvMapperFactory>().To<CsvMapperFactory>();
             var csvParserOptions = new CsvParserOptions(false, ',');
-            var csvMapper = Kernel.Get<ICsvMapperFactory>();
 
-            var csvParserProduct = new CsvParser<Product>(csvParserOptions, csvMapper.GetCsvMapper<Product>());
-            var csvParserRetailerProduct = new CsvParser<RetailerProduct>(csvParserOptions, csvMapper.GetCsvMapper<RetailerProduct>());
+            var csvParserProduct = new CsvParser<Product>(csvParserOptions, new CsvProductMapping());
+            var csvParserRetailerProduct = new CsvParser<RetailerProduct>(csvParserOptions, new CsvRetailerProductMapping());
 
             Bind<ICsvParserAdapter<Product>>().To<CsvParserAdapter<Product>>().WithConstructorArgument(csvParserProduct);
             Bind<IDataRetriever<Product>>().To<CsvDataRetriever<Product>>().WithConstructorArgument("csvFilePath", "data/IRIProducts.txt");

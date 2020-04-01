@@ -70,39 +70,52 @@ namespace IRIProductSelector.Data.Tests
                     ProductId = product1.ProductId,
                     RetailerName = "Foobar 1",
                     RetailerProductCode = "Code 1",
-                    RetailerProductCodeType = "Type 1"
+                    RetailerProductCodeType = "Barcode"
                 },
                 new RetailerProduct {
                     DateReceived = new DateTime(2019, 3, 31),
                     ProductId = product1.ProductId,
                     RetailerName = "Foobar 2",
                     RetailerProductCode = "Code 1",
-                    RetailerProductCodeType = "Type 1"
+                    RetailerProductCodeType = "Refno"
                 },
                 new RetailerProduct {
                     DateReceived = new DateTime(2019, 1, 1),
                     ProductId = product1.ProductId,
                     RetailerName = "Foobar 3",
                     RetailerProductCode = "Code 1",
-                    RetailerProductCodeType = "Type 1"
+                    RetailerProductCodeType = "Barcode"
                 },
                 new RetailerProduct {
                     DateReceived = new DateTime(2018, 1, 1),
-                    ProductId = product1.ProductId,
+                    ProductId = product2.ProductId,
                     RetailerName = "Foobar 3",
                     RetailerProductCode = "Code 1",
                     RetailerProductCodeType = "BarCode"
                 },
                 new RetailerProduct {
                     DateReceived = new DateTime(2017, 1, 1),
-                    ProductId = product1.ProductId,
+                    ProductId = product2.ProductId,
+                    RetailerName = "Foobar 4",
+                    RetailerProductCode = "Code 1",
+                    RetailerProductCodeType = "Refno"
+                },
+                new RetailerProduct {
+                    DateReceived = new DateTime(2017, 1, 1),
+                    ProductId = product2.ProductId,
                     RetailerName = "Foobar 4",
                     RetailerProductCode = "Code 1",
                     RetailerProductCodeType = "BarCode"
                 }
             };
 
-            //_mockRetailerProductRepository.Setup(s => s.GetAll()).Returns(null);
+            _mockRetailerProductRepository.Setup(s => s.GetAll()).Returns(retailerProducts);
+            _mockProductRepository.Setup(s => s.GetById(product1.ProductId)).Returns(product1);
+            _mockProductRepository.Setup(s => s.GetById(product2.ProductId)).Returns(product2);
+
+            var result = _sut.GetLatestDistinctRetailerProducts();
+
+            Assert.IsTrue(result.Count == 4);
         }
     }
 }
