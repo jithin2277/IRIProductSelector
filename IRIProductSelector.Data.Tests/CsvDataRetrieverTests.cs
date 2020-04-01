@@ -33,21 +33,21 @@ namespace IRIProductSelector.Data.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Ctor_When_ParametersAreNull_ThrowsException()
         {
-            var sut = new CsvDataRetriever<TestClass>(null, null);
+            _ = new CsvDataRetriever<TestClass>(null, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Ctor_When_ParserAdapterIsNull_ThrowsException()
         {
-            var sut = new CsvDataRetriever<TestClass>(null, _csvFilePath);
+            _ = new CsvDataRetriever<TestClass>(null, _csvFilePath);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Ctor_When_CsvFilePathIsNull_ThrowsException()
         {
-            var sut = new CsvDataRetriever<TestClass>(_mockCsvParserAdapter.Object, null);
+            _ = new CsvDataRetriever<TestClass>(_mockCsvParserAdapter.Object, null);
         }
 
         [TestMethod]
@@ -65,11 +65,6 @@ namespace IRIProductSelector.Data.Tests
 
             Assert.AreEqual(expected, actual);
         }
-
-        public class TestClass
-        {
-            public string Foo { get; set; }
-            public string Bar { get; set; }
-        }
+               
     }
 }
