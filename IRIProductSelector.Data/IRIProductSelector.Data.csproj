@@ -8,13 +8,4 @@
     <PackageReference Include="TinyCsvParser" Version="2.5.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="data\IRIProducts.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="data\RetailerProducts.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

@@ -28,14 +28,14 @@ namespace IRIProductSelector.Data
         {
             var result = new List<RetailerProductResponse>();
 
-            var groupedRetailerProducts = _retailerProductRepository
+            var groupedProducts = _retailerProductRepository
                 .GetAll()
                 .GroupBy(g => g.ProductId)
                 .Select(s => s.ToList());
 
-            foreach (var groupedRetailerProduct in groupedRetailerProducts)
+            foreach (var groupedProduct in groupedProducts)
             {
-                var groupedCodeTypes = groupedRetailerProduct
+                var groupedCodeTypes = groupedProduct
                     .GroupBy(g => g.RetailerProductCodeType)
                     .Select(s => s.ToList());
 
