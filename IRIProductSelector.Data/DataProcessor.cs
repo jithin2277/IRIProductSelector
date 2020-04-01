@@ -1,4 +1,5 @@
 ﻿using IRIProductSelector.Data.Entities;
+using IRIProductSelector.Data.Models;
 using IRIProductSelector.Data.Respositories;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace IRIProductSelector.Data
 {
     public interface IDataProcessor
     {
-        IList<RetailerProduct> GetDistinctRetailerProducts();
+        IList<RetailerProductResponse> GetDistinctRetailerProducts();
     }
 
     public class DataProcessor : IDataProcessor
@@ -23,10 +24,35 @@ namespace IRIProductSelector.Data
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         }
 
-        public IList<RetailerProduct> GetDistinctRetailerProducts()
+        public IList<RetailerProductResponse> GetDistinctRetailerProducts()
         {
-            var retailerProducts = _retailerProductRepository.GetAll().ToList();
-            return retailerProducts;
+            var result = new List<RetailerProductResponse>();
+
+            var groupedRetailerProducts = _retailerProductRepository
+                .GetAll()
+                .GroupBy(g => g.ProductId)
+                .Select(s => s.ToList());
+
+            foreach (var groupedRetailerProduct in groupedRetailerProducts)
+            {
+                var groupedCodeTypes = groupedRetailerProduct
+                    .GroupBy(g => g.RetailerProductCodeType)
+                    .Select(s => s.ToList());
+
+                foreach (var groupedCodeType in groupedCodeTypes)
+                {
+                    var latestCodeType = groupedCodeType.OrderByDescending(o => o.DateReceived).FirstOrDefault();
+                    
+                    result.Add(new RetailerProductResponse { 
+                        Code = latestCodeType.RetailerProductCode, 
+                        CodeType = latestCodeType.RetailerProductCodeType, 
+                        ProductId = latestCodeType.ProductId, 
+                        ProductName = _productRepository.GetById(latestCodeType.ProductId).ProductName 
+                    });
+                }
+            }
+
+            return result;
         }
     }
 }

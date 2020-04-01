@@ -10,6 +10,6 @@ namespace IRIProductSelector.Data.Entities
         public string RetailerName { get; set; }
         public string RetailerProductCode { get; set; }
         public string RetailerProductCodeType { get; set; }
-        public string DateReceived { get; set; }
+        public DateTime DateReceived { get; set; }
     }
 }
