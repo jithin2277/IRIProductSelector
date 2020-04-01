@@ -10,7 +10,7 @@ namespace IRIProductSelector.Data
 {
     public interface IDataProcessor
     {
-        IList<RetailerProductResponse> GetDistinctRetailerProducts();
+        IList<RetailerProductResponse> GetLatestDistinctRetailerProducts();
     }
 
     public class DataProcessor : IDataProcessor
@@ -24,7 +24,7 @@ namespace IRIProductSelector.Data
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         }
 
-        public IList<RetailerProductResponse> GetDistinctRetailerProducts()
+        public IList<RetailerProductResponse> GetLatestDistinctRetailerProducts()
         {
             var result = new List<RetailerProductResponse>();
 

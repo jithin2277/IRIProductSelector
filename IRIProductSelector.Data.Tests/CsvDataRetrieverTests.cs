@@ -12,15 +12,15 @@ namespace IRIProductSelector.Data.Tests
     [TestClass]
     public class CsvDataRetrieverTests
     {
-        private Mock<ICsvParserAdapter<TestClass>> _mockCsvParserAdapter;
+        private Mock<ICsvParserAdapter<FooBar>> _mockCsvParserAdapter;
         private string _csvFilePath = "Foo";
-        private IDataRetriever<TestClass> _sut;
+        private IDataRetriever<FooBar> _sut;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _mockCsvParserAdapter = new Mock<ICsvParserAdapter<TestClass>>(MockBehavior.Strict);
-            _sut = new CsvDataRetriever<TestClass>(_mockCsvParserAdapter.Object, _csvFilePath);
+            _mockCsvParserAdapter = new Mock<ICsvParserAdapter<FooBar>>(MockBehavior.Strict);
+            _sut = new CsvDataRetriever<FooBar>(_mockCsvParserAdapter.Object, _csvFilePath);
         }
 
         [TestCleanup]
@@ -33,30 +33,30 @@ namespace IRIProductSelector.Data.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Ctor_When_ParametersAreNull_ThrowsException()
         {
-            _ = new CsvDataRetriever<TestClass>(null, null);
+            _ = new CsvDataRetriever<FooBar>(null, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Ctor_When_ParserAdapterIsNull_ThrowsException()
         {
-            _ = new CsvDataRetriever<TestClass>(null, _csvFilePath);
+            _ = new CsvDataRetriever<FooBar>(null, _csvFilePath);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Ctor_When_CsvFilePathIsNull_ThrowsException()
         {
-            _ = new CsvDataRetriever<TestClass>(_mockCsvParserAdapter.Object, null);
+            _ = new CsvDataRetriever<FooBar>(_mockCsvParserAdapter.Object, null);
         }
 
         [TestMethod]
         public void GetResults_Succeeds()
         {
-            var expected = new List<TestClass>() 
+            var expected = new List<FooBar>() 
             {
-                new TestClass() { Foo = "Foo", Bar = "Bar"},
-                new TestClass() { Foo = "test", Bar = "test"}
+                new FooBar() { Foo = "Foo", Bar = "Bar"},
+                new FooBar() { Foo = "test", Bar = "test"}
             };
 
             _mockCsvParserAdapter.Setup(s => s.ReadFromFile(_csvFilePath)).Returns(expected);
@@ -65,6 +65,11 @@ namespace IRIProductSelector.Data.Tests
 
             Assert.AreEqual(expected, actual);
         }
-               
+
+        public class FooBar
+        {
+            public string Foo { get; set; }
+            public string Bar { get; set; }
+        }
     }
 }

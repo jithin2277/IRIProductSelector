@@ -33,7 +33,7 @@ namespace IRIProductSelector.App
 
             var dataProcessor = kernel.Get<IDataProcessor>();
 
-            var retailerProducts = dataProcessor.GetDistinctRetailerProducts();
+            var retailerProducts = dataProcessor.GetLatestDistinctRetailerProducts();
 
             Console.WriteLine("ProductId,ProductName,CodeType,Code");
             foreach (var retailerProduct in retailerProducts)

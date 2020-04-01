@@ -39,7 +39,7 @@ namespace IRIProductSelector.Data.Tests
         [TestMethod]
         public void GetAll_GetsAllRetailerProducts()
         {
-            var retailerProduct = new RetailerProduct { DateReceived = "1/1/2001", ProductId = "1" , RetailerName = "foobar", RetailerProductCode = "code", RetailerProductCodeType = "type" };
+            var retailerProduct = new RetailerProduct { DateReceived = new DateTime(), ProductId = "1" , RetailerName = "foobar", RetailerProductCode = "code", RetailerProductCodeType = "type" };
 
             var retailerProducts = new List<RetailerProduct> {
                 retailerProduct
