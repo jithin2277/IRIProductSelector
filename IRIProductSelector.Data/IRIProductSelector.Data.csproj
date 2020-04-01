@@ -9,13 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="data\IRIProducts.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="data\IRIProducts.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="data\RetailerProducts.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="data\RetailerProducts.txt">
