@@ -73,6 +73,6 @@ Total tests: 13
 
 ## Packages used
 
-TinyCsvParser
-Moq
-Ninject
+* TinyCsvParser
+* Moq
+* Ninject
