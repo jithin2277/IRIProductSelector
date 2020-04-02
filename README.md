@@ -48,3 +48,26 @@ ProductId,ProductName,CodeType,Code
 
 ```
 Press Enter to exit
+
+## Tests
+
+In the solution root directory run the following commands
+
+```bash
+cd IRIProductSelector.Data.Tests
+
+dotnet build -c Release IRIProductSelector.Data.Tests.csproj
+
+dotnet test bin/Release/netcoreapp3.1/IRIProductSelector.Data.Tests.dll
+
+```
+
+## Test results
+
+```bash
+Test Run Successful.
+Total tests: 13
+     Passed: 13
+ Total time: 1.0068 Seconds
+```
+
