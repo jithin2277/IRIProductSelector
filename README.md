@@ -71,3 +71,8 @@ Total tests: 13
  Total time: 1.0068 Seconds
 ```
 
+## Packages used
+
+TinyCsvParser
+Moq
+Ninject
